@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { db } from './database/Firebase';
-import { getDocs, collection } from 'firebase/firestore';
+//import { db } from './database/firebase';
+//import { getDocs, collection } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
+import  Login  from './Login';
 
 const FormsList = () => {
   const [forms, setForms] = useState([])
@@ -17,7 +18,7 @@ const FormsList = () => {
   }
 
   useEffect(() => {
-    obtenerFormularios();
+    //obtenerFormularios();
   },[])
 
   return (
@@ -35,6 +36,7 @@ export default function App() {
     <View style={styles.container}>
       <Text>Proyecto moviles</Text>
         <FormsList/>
+        <Login/>
       <StatusBar style="auto" />
     </View>
   );
