@@ -1,23 +1,14 @@
 import React, {useEffect} from 'react';
 import { Image, Text, StyleSheet, View, ScrollView, TouchableOpacity, TextInput, Button, Alert } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import  LoginScreen  from './screen/LoginScreen';
-import  HomeScreen  from './screen/HomeScreen';
+import { BlurView } from 'expo-blur';
 
-  const Stack = createNativeStackNavigator();
-  
-  export default function App() {
+export default function HomeScreen() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Inicio" component={LoginScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home</Text>
+    </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
