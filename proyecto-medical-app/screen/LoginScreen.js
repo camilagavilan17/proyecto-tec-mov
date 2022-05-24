@@ -22,12 +22,13 @@ export default function LoginScreen() {
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       console.log('Cuenta creada!')
+      Alert.alert("Cuenta creada!")
       const user = userCredential.user;
       console.log(user)
     })
     .catch(error => {
       console.log(error)
-      Alert.alert(error.message)
+      Alert.alert("Error de autentificación")
     })
   }
 
@@ -41,6 +42,7 @@ export default function LoginScreen() {
     })
     .catch(error => {
       console.log(error)
+      Alert.alert("Correo o contraseña equivocada!")
     })
   }
   return (
