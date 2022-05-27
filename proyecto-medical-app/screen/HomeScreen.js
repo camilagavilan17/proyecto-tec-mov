@@ -1,11 +1,23 @@
 import React, {useEffect} from 'react';
 import { Image, Text, StyleSheet, View, ScrollView, TouchableOpacity, TextInput, Button, Alert } from 'react-native';
 import { BlurView } from 'expo-blur';
+import { useNavigation } from '@react-navigation/native';
 
+  
 export default function HomeScreen() {
+  const navigation = useNavigation();
+  
+  const pressTratamientos = () => {
+    console.log("Press tratamientos");
+    navigation.navigate('Tratamientos');
+    
+  }
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home</Text>
+      <TouchableOpacity onPress={pressTratamientos} style={[styles.button, {backgroundColor: '#6792F090'}]}>
+        <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Mis tratamientos</Text>
+      </TouchableOpacity>
     </View>
   );
 }

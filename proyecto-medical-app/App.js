@@ -2,8 +2,10 @@ import React, {useEffect} from 'react';
 import { Image, Text, StyleSheet, View, ScrollView, TouchableOpacity, TextInput, Button, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import  LoginScreen  from './screen/LoginScreen';
-import  HomeScreen  from './screen/HomeScreen';
+import LoginScreen  from './screen/LoginScreen';
+import HomeScreen  from './screen/HomeScreen';
+import Tratamientos  from './screen/Tratamientos';
+import NuevoTratamiento from './screen/NuevoTratamiento';
 
   const Stack = createNativeStackNavigator();
   
@@ -13,6 +15,8 @@ import  HomeScreen  from './screen/HomeScreen';
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Inicio" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Tratamientos" component={Tratamientos} />
+        <Stack.Screen name="NuevoTratamiento" component={NuevoTratamiento} />
       </Stack.Navigator>
     </NavigationContainer>
   );
