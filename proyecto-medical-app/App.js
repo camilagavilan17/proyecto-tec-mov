@@ -6,6 +6,7 @@ import LoginScreen  from './screen/LoginScreen';
 import HomeScreen  from './screen/HomeScreen';
 import Tratamientos  from './screen/Tratamientos';
 import NuevoTratamiento from './screen/NuevoTratamiento';
+import CrearNuevoTratamiento from './screen/CrearNuevoTratamiento';
 
   const Stack = createNativeStackNavigator();
   
@@ -16,7 +17,8 @@ import NuevoTratamiento from './screen/NuevoTratamiento';
         <Stack.Screen name="Inicio" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Tratamientos" component={Tratamientos} />
-        <Stack.Screen name="NuevoTratamiento" component={NuevoTratamiento} />
+        <Stack.Screen name="Nuevo tratamiento" component={NuevoTratamiento} />
+        <Stack.Screen name="Crear nuevo tratamiento" component={CrearNuevoTratamiento} />
       </Stack.Navigator>
     </NavigationContainer>
   );

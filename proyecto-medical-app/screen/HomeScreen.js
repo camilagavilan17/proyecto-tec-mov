@@ -14,8 +14,16 @@ export default function HomeScreen() {
   }
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home</Text>
-      <TouchableOpacity onPress={pressTratamientos} style={[styles.button, {backgroundColor: '#6792F090'}]}>
+      <TouchableOpacity onPress={pressTratamientos} 
+        style={{width: 250,
+          height: 40,
+          borderRadius: 10,
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginVertical: 10,
+          borderColor: '#fff',
+          borderWidth: 1,
+          backgroundColor: '#6792F090'}}>
         <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Mis tratamientos</Text>
       </TouchableOpacity>
     </View>
