@@ -13,7 +13,7 @@ export default function NuevoTratamiento() {
   }
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Seleccione nuevo tratamiento</Text>
+        <Text>Elegir nuevo tratamiento</Text>
         <TouchableOpacity onPress={pressNuevoTratamiento2} 
          style={{width: 250,
           height: 40,

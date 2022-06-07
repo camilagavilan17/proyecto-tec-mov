@@ -33,6 +33,8 @@ export default function LoginScreen() {
   }
 
   const handleSignIn = () => {
+    navigation.navigate('Home');
+    /*
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       console.log('Conectado!')
@@ -44,6 +46,7 @@ export default function LoginScreen() {
       console.log(error)
       Alert.alert("Correo o contraseña equivocada!")
     })
+    */
   }
   return (
     <View style={styles.container}>
