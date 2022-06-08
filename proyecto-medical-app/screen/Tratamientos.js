@@ -21,7 +21,7 @@ export default function Tratamientos() {
         navigation.navigate('Nuevo tratamiento');
         
     }
-    
+    /*
     function renderItem ({item}){
         return(
             <View>
@@ -47,17 +47,22 @@ export default function Tratamientos() {
     };
     useEffect(() => {
         loadTratamientos()
-    }, [])
-  
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Mis tratamientos</Text>
-            <Text>Datos</Text>
-            <FlatList
+ }, [])
+
+
+<FlatList
                 data = {tratamientos2}
                 renderItem = {renderItem}
                 keyExtractor = {item => item.id}
             />
+
+
+    */
+       return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Mis tratamientos</Text>
+            <Text>Datos</Text>
+            
             <TouchableOpacity onPress={pressNuevoTratamiento} 
                 style={[styles.touchable, {backgroundColor: 'green'}]}>
                 <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Nuevo tratamiento</Text>
