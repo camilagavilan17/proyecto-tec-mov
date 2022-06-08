@@ -6,13 +6,17 @@ import {styles} from '../estilos/style';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Platform } from 'react-native-web';
 import { getAuth } from 'firebase/auth';
+import { async } from '@firebase/util';
+
 import firestore from '@react-native-firebase/firestore';
 
 export default function CrearNuevoTratamiento() {
+    
+    //usuario id
     const auth = getAuth();
     const user = auth.currentUser;
     const userid = user.uid;
-
+    //navegacion
     const navigation = useNavigation();
 
     const [nombre, setNombre] = useState('');
@@ -69,14 +73,16 @@ export default function CrearNuevoTratamiento() {
         console.log(date);
         console.log(date2);
         try {
-            firestore().collection('tratamiento').add({
-                fechainicio: date,
-                fechatermino: date2,
-                nombre: nombre,
-                refusuario: userid,
-            }).then(() => {
-                console.log('Ready');
+                        
+            firestore()
+            .collection('Users')
+            .add({
+                name: 'Pablo',
+                age: 24,
             })
+            .then(() => {
+                console.log('Ready');
+            });
         }catch(e){
             console.log(e);
         } finally{

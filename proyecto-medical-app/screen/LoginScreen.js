@@ -6,6 +6,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } f
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../firebase-config';
 
+
 import { useNavigation } from '@react-navigation/native';
  
 export default function LoginScreen() {
