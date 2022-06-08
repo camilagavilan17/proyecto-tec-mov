@@ -2,14 +2,18 @@ import React, {useEffect} from 'react';
 import { Image, Text, StyleSheet, View, ScrollView, TouchableOpacity, TextInput, Button, Alert } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { useNavigation } from '@react-navigation/native';
+import { getAuth } from 'firebase/auth';
 
-  
 export default function HomeScreen() {
+  const auth = getAuth();
+  const user = auth.currentUser;
+
   const navigation = useNavigation();
   
   const pressTratamientos = () => {
     console.log("Press tratamientos");
     navigation.navigate('Tratamientos');
+    console.log(user.uid);
     
   }
   return (

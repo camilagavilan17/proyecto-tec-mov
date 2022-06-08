@@ -5,8 +5,14 @@ import { useNavigation } from '@react-navigation/native';
 import {styles} from '../estilos/style';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Platform } from 'react-native-web';
+import { getAuth } from 'firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 export default function CrearNuevoTratamiento() {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const userid = user.uid;
+
     const navigation = useNavigation();
 
     const [nombre, setNombre] = useState('');
@@ -57,12 +63,26 @@ export default function CrearNuevoTratamiento() {
         setMode(currentMode);
     }
     const pressCrear = () => {
-    console.log("Nombre:");
-    console.log(nombre);
-    console.log("Press crear");
-    console.log(date);
-    console.log(date2);
-    //navigation.navigate('Home');
+        console.log("Nombre:");
+        console.log(nombre);
+        console.log("Press crear");
+        console.log(date);
+        console.log(date2);
+        try {
+            firestore().collection('tratamiento').add({
+                fechainicio: date,
+                fechatermino: date2,
+                nombre: nombre,
+                refusuario: userid,
+            }).then(() => {
+                console.log('Ready');
+            })
+        }catch(e){
+            console.log(e);
+        } finally{
+            setNombre('');
+        }
+        //navigation.navigate('Home');
     
     }
     return (

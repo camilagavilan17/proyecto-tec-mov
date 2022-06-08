@@ -6,7 +6,6 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } f
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../firebase-config';
 
-
 import { useNavigation } from '@react-navigation/native';
  
 export default function LoginScreen() {
@@ -33,12 +32,13 @@ export default function LoginScreen() {
   }
 
   const handleSignIn = () => {
-    navigation.navigate('Home');
-    /*
+    //navigation.navigate('Home');
+    
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      console.log('Conectado!')
+      console.log('Conectado!');
       const user = userCredential.user;
+      console.log("AAA");
       console.log(user)
       navigation.navigate('Home');
     })
@@ -46,7 +46,7 @@ export default function LoginScreen() {
       console.log(error)
       Alert.alert("Correo o contraseña equivocada!")
     })
-    */
+    
   }
   return (
     <View style={styles.container}>
