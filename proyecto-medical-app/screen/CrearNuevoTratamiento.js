@@ -10,14 +10,16 @@ import { async } from '@firebase/util';
 
 import firestore from '@react-native-firebase/firestore';
 
-export default function CrearNuevoTratamiento() {
+export default function CrearNuevoTratamiento({navigation, route}) {
+    //1=cefaleo, 2=estomacal
+    const tipoTratamiento = route.params.tipo[0];
     
     //usuario id
     const auth = getAuth();
     const user = auth.currentUser;
     const userid = user.uid;
     //navegacion
-    const navigation = useNavigation();
+    //const navigation = useNavigation();
 
     const [nombre, setNombre] = useState('');
 

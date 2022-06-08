@@ -6,15 +6,22 @@ import { useNavigation } from '@react-navigation/native';
 export default function NuevoTratamiento() {
   const navigation = useNavigation();
 
+  const pressNuevoTratamiento = () => {
+    console.log("Press crear tratamiento nuevo");
+    console.log("1");
+    navigation.navigate('Crear nuevo tratamiento', {tipo: ['1']});
+    
+  }
   const pressNuevoTratamiento2 = () => {
     console.log("Press crear tratamiento nuevo");
-    navigation.navigate('Crear nuevo tratamiento');
+    console.log("2");
+    navigation.navigate('Crear nuevo tratamiento', {tipo: ['2']});
     
   }
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Elegir nuevo tratamiento</Text>
-        <TouchableOpacity onPress={pressNuevoTratamiento2} 
+        <TouchableOpacity onPress={pressNuevoTratamiento} 
          style={{width: 250,
           height: 40,
           borderRadius: 10,
