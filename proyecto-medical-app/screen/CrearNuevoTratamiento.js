@@ -1,14 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import { Image, Text, StyleSheet, View, ScrollView, TouchableOpacity, TextInput, Button, Alert } from 'react-native';
-import { BlurView } from 'expo-blur';
-import { useNavigation } from '@react-navigation/native';
+import React, {useState} from 'react';
+import { Text, View, TouchableOpacity, TextInput } from 'react-native';
 import {styles} from '../estilos/style';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Platform } from 'react-native-web';
 import { getAuth } from 'firebase/auth';
-import { async } from '@firebase/util';
-
-import firestore from '@react-native-firebase/firestore';
+import { db } from '../firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 export default function CrearNuevoTratamiento({navigation, route}) {
     //1=cefaleo, 2=estomacal
@@ -68,15 +65,20 @@ export default function CrearNuevoTratamiento({navigation, route}) {
         setShow2(true);
         setMode(currentMode);
     }
-    const pressCrear = () => {
+    const pressCrear = async () => {
         console.log("Nombre:");
         console.log(nombre);
         console.log("Press crear");
         console.log(date);
         console.log(date2);
+        const newTreatment = {
+            name: nombre,
+            initDate: date,
+            endDate: date2
+        }
         try {
-                        
-            firestore()
+            await addDoc(collection(db, 'treatments'), newTreatment);
+            /*firestore()
             .collection('Users')
             .add({
                 name: 'Pablo',
@@ -84,7 +86,7 @@ export default function CrearNuevoTratamiento({navigation, route}) {
             })
             .then(() => {
                 console.log('Ready');
-            });
+            });*/
         }catch(e){
             console.log(e);
         } finally{

@@ -1,9 +1,7 @@
-// Import the functions you need from the SDKs you need
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
 
-// Your web app's Firebase configuration
-export const firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyDvPHeCePVrsgzDFLTZTdKJ_3sbpEQLp1M",
   authDomain: "tec-mov-medical-1ff57.firebaseapp.com",
   projectId: "tec-mov-medical-1ff57",
@@ -12,3 +10,5 @@ export const firebaseConfig = {
   appId: "1:159614098304:web:d3d21a324a418ec159ff65"
 };
 
+initializeApp(firebaseConfig);
+export const db = getFirestore();
