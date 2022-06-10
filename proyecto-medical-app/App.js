@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen  from './screen/LoginScreen';
 import HomeScreen  from './screen/HomeScreen';
 import Tratamientos  from './screen/Tratamientos';
+import Formularios from './screen/Formularios';
 import NuevoTratamiento from './screen/NuevoTratamiento';
 import CrearNuevoTratamiento from './screen/CrearNuevoTratamiento';
 
@@ -17,6 +18,7 @@ import CrearNuevoTratamiento from './screen/CrearNuevoTratamiento';
         <Stack.Screen name="Inicio" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Tratamientos" component={Tratamientos} />
+        <Stack.Screen name="Formularios" component={Formularios} />
         <Stack.Screen name="Nuevo tratamiento" component={NuevoTratamiento} />
         <Stack.Screen name="Crear nuevo tratamiento" component={CrearNuevoTratamiento} />
       </Stack.Navigator>

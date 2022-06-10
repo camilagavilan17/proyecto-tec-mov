@@ -10,7 +10,13 @@ import { collection, addDoc } from 'firebase/firestore';
 export default function CrearNuevoTratamiento({navigation, route}) {
     //1=cefaleo, 2=estomacal
     const tipoTratamiento = route.params.tipo[0];
-    
+    var tipo = '';
+    if(tipoTratamiento==1){
+        tipo = 'cefaleo';
+    }
+    else if(tipoTratamiento==2){
+        tipo = 'estomacal';
+    }
     //usuario id
     const auth = getAuth();
     const user = auth.currentUser;
@@ -74,10 +80,12 @@ export default function CrearNuevoTratamiento({navigation, route}) {
         const newTreatment = {
             name: nombre,
             initDate: date,
-            endDate: date2
+            endDate: date2,
+            refuser: userid,
+            tipoTratamiento: tipo,
         }
         try {
-            await addDoc(collection(db, 'treatments'), newTreatment);
+            await addDoc(collection(db, 'tratamientos'), newTreatment);
             /*firestore()
             .collection('Users')
             .add({
@@ -92,7 +100,7 @@ export default function CrearNuevoTratamiento({navigation, route}) {
         } finally{
             setNombre('');
         }
-        //navigation.navigate('Home');
+        navigation.navigate('Tratamientos');
     
     }
     return (

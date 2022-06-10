@@ -8,23 +8,19 @@ import { async, querystring } from '@firebase/util';
 import { collection, getDocs, onSnapshot, orderBy, query, QuerySnapshot, where } from 'firebase/firestore';
 import { db } from '../firebase';
 
-export default function Tratamientos() {
+export default function Formularios({navigation, route}) {
+    const idTratamiento = route.params.id;
+
     const auth = getAuth();
     const user = auth.currentUser;
     const userid = user.uid;
     const [tratamientos, setTratamientos] = useState([]);
-    const navigation = useNavigation();
   
     const pressNuevoTratamiento = () => {
         console.log("Press tratamiento nuevo");
         navigation.navigate('Nuevo tratamiento');
     }
-    const pressGoFormulario = (id) => {
-
-        console.log("Press tratamiento nuevo");
-        console.log(id);
-        navigation.navigate('Formularios', {id});
-    }
+    
     useEffect(() => {
         const datos = collection(db, 'tratamientos');
         const q = query(datos,  where('refuser','==',userid));
@@ -43,22 +39,10 @@ export default function Tratamientos() {
     
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Mis tratamientos</Text>
-            {tratamientos.map(tratamiento => 
-            <>
-                <TouchableOpacity onPress={()=>pressGoFormulario(tratamiento.id)} 
-                    style={[styles.touchable, {backgroundColor: 'green'}]}>
-                    <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>{tratamiento.nombre}</Text>
-                </TouchableOpacity>
-            </>
-                
-                
-            )}
+            <Text>Mis formularios</Text>
+            <Text>{idTratamiento}</Text>
             
-            <TouchableOpacity onPress={pressNuevoTratamiento} 
-                style={[styles.touchable, {backgroundColor: 'green'}]}>
-                <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Nuevo tratamiento</Text>
-            </TouchableOpacity>
+           
             
         </View>
     );
