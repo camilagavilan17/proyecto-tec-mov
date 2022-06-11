@@ -1,66 +1,51 @@
 import React, {useEffect} from 'react';
-import { Image, Text, StyleSheet, View, ScrollView, TouchableOpacity, TextInput, Button, Alert } from 'react-native';
+import { Image, Text, StyleSheet, View, ScrollView, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { BlurView } from 'expo-blur';
+import { Appbar } from 'react-native-paper';
+import { Provider as PaperProvider, Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import { useNavigation } from '@react-navigation/native';
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
+  const onPressHandler = () =>{
+    navigation.navigate('Image')
+  }
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home</Text>
-    </View>
+    <PaperProvider>
+      <Appbar >
+   <Appbar.Action
+     icon="archive"
+     onPress={(onPressHandler) => navigation.navigate('Image')}
+    />
+    <Appbar.Action icon="mail" onPress={() => console.log('Pressed mail')} />
+    <Appbar.Action icon="label" onPress={() => console.log('Pressed label')} />
+    <Appbar.Action
+      icon="delete"
+      onPress={() => console.log('Pressed delete')}
+    />
+  </Appbar>
+  {/* <Pressable>
+    onPress={onPressHandler}
+    style{({pressed}) => ({backgroundColor: pressed ? '#ddd' : '#0f0'})}
+<Text>
+  Captura de receta
+</Text>
+  </Pressable> */}
+
+  <Card>
+    <Card.Content>
+      <Title>Card title</Title>
+      <Paragraph>Card content</Paragraph>
+    </Card.Content>
+    <Card.Cover source={{ uri: 'https://picsum.photos/600' }} />
+    <Card.Actions>
+      <Button>Cancel</Button>
+      <Button>Ok</Button>
+    </Card.Actions>
+  </Card>
+    </PaperProvider>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  image: {
-
-    flex:1,
-    resizeMode: 'cover',
-    justifyContent:'center',
- 
-  },
-  login: {
-    width: 350,
-    height: 500,
-    borderColor: '#fff',
-    borderWidth: 2,
-    borderRadius: 10,
-    padding: 10,
-    alignItems: 'center',
-  },
-  profilePicture: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    borderColor: '#fff',
-    borderWidth: 1,
-    marginVertical: 30
-  },
-  input: {
-    width: 250,
-    height: 40,
-    borderColor: '#fff',
-    borderWidth: 2,
-    borderRadius: 10,
-    padding: 10,
-    marginVertical: 10,
-    backgroundColor: '#ffffff90',
-    marginBottom: 20
-  },
-  button: {
-    width: 250,
-    height: 40,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 10,
-    borderColor: '#fff',
-    borderWidth: 1,
-  }
 
 
-});
