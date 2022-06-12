@@ -8,18 +8,19 @@ import { async, querystring } from '@firebase/util';
 import { collection, getDocs, onSnapshot, orderBy, query, QuerySnapshot, where } from 'firebase/firestore';
 import { db } from '../firebase';
 
-export default function Formularios({navigation, route}) {
-    const idTratamiento = route.params.idTratamiento;
+export default function Formulario({navigation, route}) {
+    const idTratamiento = route.params.id;
 
     const auth = getAuth();
     const user = auth.currentUser;
     const userid = user.uid;
     const [tratamientos, setTratamientos] = useState([]);
   
-    const pressNuevoTratamiento = () => {
-        console.log("Press tratamiento nuevo");
-        //navigation.navigate('Nuevo tratamiento');
+    const pressGoFormulario = (idTratamiento) => {
+        //console.log("Press tratamiento nuevo");
+        //navigation.navigate('Nuevo tratamiento', {idTratamiento});
     }
+   
     
     useEffect(() => {
         const datos = collection(db, 'tratamientos');
@@ -38,10 +39,8 @@ export default function Formularios({navigation, route}) {
     }, []);
     
     return (
-        <View style={{ flex: 1, alignItems: 'center' }}>
-            <Text>Mis formularios</Text>
-            <Text>Id tratamiento:</Text>
-            <Text>{idTratamiento}</Text>
+        <View style={{ flex: 1, alignItems: 'center'}}>
+            <Text>Mi formulario</Text>
             
            
             

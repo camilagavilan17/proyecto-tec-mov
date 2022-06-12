@@ -16,14 +16,14 @@ export default function Tratamientos() {
     const navigation = useNavigation();
   
     const pressNuevoTratamiento = () => {
-        console.log("Press tratamiento nuevo");
+        console.log("Nuevo tratamiento");
         navigation.navigate('Nuevo tratamiento');
     }
-    const pressGoFormulario = (id) => {
+    const pressGoTratamiento = (id) => {
 
-        console.log("Press tratamiento nuevo");
+        console.log("Tratamiento");
         console.log(id);
-        navigation.navigate('Formularios', {id});
+        navigation.navigate('Tratamiento', {id});
     }
     useEffect(() => {
         const datos = collection(db, 'tratamientos');
@@ -45,17 +45,12 @@ export default function Tratamientos() {
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>Mis tratamientos</Text>
             {tratamientos.map(tratamiento => 
-            <>
-                <TouchableOpacity onPress={()=>pressGoFormulario(tratamiento.id)} 
+                <TouchableOpacity onPress={()=>pressGoTratamiento(tratamiento.id)} 
                     style={[styles.touchable, {backgroundColor: 'green'}]}>
                     <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>{tratamiento.nombre}</Text>
                 </TouchableOpacity>
-            </>
-                
-                
             )}
-            
-            <TouchableOpacity onPress={pressNuevoTratamiento} 
+            <TouchableOpacity onPress={()=>pressNuevoTratamiento} 
                 style={[styles.touchable, {backgroundColor: 'green'}]}>
                 <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Nuevo tratamiento</Text>
             </TouchableOpacity>

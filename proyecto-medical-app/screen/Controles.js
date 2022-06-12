@@ -8,7 +8,7 @@ import { async, querystring } from '@firebase/util';
 import { collection, getDocs, onSnapshot, orderBy, query, QuerySnapshot, where } from 'firebase/firestore';
 import { db } from '../firebase';
 
-export default function Formularios({navigation, route}) {
+export default function Controles({navigation, route}) {
     const idTratamiento = route.params.idTratamiento;
 
     const auth = getAuth();
@@ -16,9 +16,9 @@ export default function Formularios({navigation, route}) {
     const userid = user.uid;
     const [tratamientos, setTratamientos] = useState([]);
   
-    const pressNuevoTratamiento = () => {
+    const pressGoControlMedico = (idTratamiento) => {
         console.log("Press tratamiento nuevo");
-        //navigation.navigate('Nuevo tratamiento');
+        navigation.navigate('Controles', {idTratamiento});
     }
     
     useEffect(() => {
@@ -38,10 +38,9 @@ export default function Formularios({navigation, route}) {
     }, []);
     
     return (
-        <View style={{ flex: 1, alignItems: 'center' }}>
-            <Text>Mis formularios</Text>
-            <Text>Id tratamiento:</Text>
-            <Text>{idTratamiento}</Text>
+        <View style={{ flex: 1, alignItems: 'center'}}>
+            <Text>Mis controles</Text>
+            <Text>Id tratamiento: {idTratamiento}</Text>
             
            
             

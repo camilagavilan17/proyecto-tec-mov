@@ -12,7 +12,7 @@ export default function HomeScreen() {
   
   const pressTratamientos = () => {
     console.log("Press tratamientos");
-    navigation.navigate('Tratamientos');
+    navigation.navigate('Mis tratamientos');
     console.log(user.uid);
     
   }

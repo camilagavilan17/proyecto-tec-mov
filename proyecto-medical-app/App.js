@@ -8,6 +8,11 @@ import Tratamientos  from './screen/Tratamientos';
 import Formularios from './screen/Formularios';
 import NuevoTratamiento from './screen/NuevoTratamiento';
 import CrearNuevoTratamiento from './screen/CrearNuevoTratamiento';
+import Tratamiento from './screen/Tratamiento';
+import Medicamentos from './screen/Medicamentos';
+import Controles from './screen/Controles';
+import Medicamento from './screen/Medicamento';
+import CrearNuevoMedicamento from './screen/CrearNuevoMedicamento';
 
   const Stack = createNativeStackNavigator();
   
@@ -17,10 +22,19 @@ import CrearNuevoTratamiento from './screen/CrearNuevoTratamiento';
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Inicio" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Tratamientos" component={Tratamientos} />
-        <Stack.Screen name="Formularios" component={Formularios} />
+
+        <Stack.Screen name="Mis tratamientos" component={Tratamientos} />
+        <Stack.Screen name="Tratamiento" component={Tratamiento} />
         <Stack.Screen name="Nuevo tratamiento" component={NuevoTratamiento} />
         <Stack.Screen name="Crear nuevo tratamiento" component={CrearNuevoTratamiento} />
+        
+        <Stack.Screen name="Mis formularios" component={Formularios} />
+
+        <Stack.Screen name="Mis medicamentos" component={Medicamentos} />
+        <Stack.Screen name="Medicamento" component={Medicamento} />
+        <Stack.Screen name="Crear nuevo medicamento" component={CrearNuevoMedicamento} />
+
+        <Stack.Screen name="Mis controles" component={Controles} />
       </Stack.Navigator>
     </NavigationContainer>
   );
