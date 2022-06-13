@@ -3,9 +3,6 @@ import { Image, Text, StyleSheet, View, ScrollView, TouchableOpacity, TextInput,
 import { BlurView } from 'expo-blur';
 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from '../firebase-config';
-
 
 import { useNavigation } from '@react-navigation/native';
  
@@ -15,8 +12,7 @@ export default function LoginScreen() {
   const [password, setPassword] = React.useState('')
   const navigation = useNavigation();
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+  const auth = getAuth();
 
   const handleCreateAccount = () => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -33,10 +29,13 @@ export default function LoginScreen() {
   }
 
   const handleSignIn = () => {
+    //navigation.navigate('Home');
+    
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      console.log('Conectado!')
+      console.log('Conectado!');
       const user = userCredential.user;
+      console.log("AAA");
       console.log(user)
       navigation.navigate('Home');
     })
@@ -44,6 +43,7 @@ export default function LoginScreen() {
       console.log(error)
       Alert.alert("Correo o contraseña equivocada!")
     })
+    
   }
   return (
     <View style={styles.container}>
