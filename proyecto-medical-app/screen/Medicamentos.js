@@ -16,7 +16,7 @@ export default function Medicamentos({navigation, route}) {
     const [medicamentos, setMedicamentos] = useState([]);
   
     const pressGoMedicamento = (medicamento) => {
-        console.log("Press medicamento nuevo");
+        console.log("Press medicamento");
         navigation.navigate('Medicamento', {medicamento});
     }
     const pressNuevoMedicamento = (idTratamiento) => {
@@ -64,8 +64,8 @@ export default function Medicamentos({navigation, route}) {
                 </TouchableOpacity>
             )}
              <TouchableOpacity onPress={()=>pressNuevoMedicamento(idTratamiento)} 
-                style={[styles.touchable, {backgroundColor: 'green'}]}>
-                <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Nuevo medicamento</Text>
+                style={[styles.touchable, {backgroundColor: '#FFF2CC'}]}>
+                <Text style={{fontSize: 17, fontWeight: '400', color: 'black'}}>Nuevo medicamento</Text>
             </TouchableOpacity>
             
         </View>

@@ -100,7 +100,7 @@ export default function CrearNuevoTratamiento({navigation, route}) {
         } finally{
             setNombre('');
         }
-        navigation.navigate('Tratamientos');
+        navigation.navigate('Mis tratamientos');
     
     }
     return (
@@ -116,7 +116,7 @@ export default function CrearNuevoTratamiento({navigation, route}) {
             <TouchableOpacity onPress={() => showMode2('date')} style={[styles.touchable, { backgroundColor: 'blue'}]}>
                 <Text style={styles.text}>Seleccionar fecha termino</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={pressCrear} style={[styles.touchable, { backgroundColor: 'green'}]}>
+            <TouchableOpacity onPress={()=>pressCrear()} style={[styles.touchable, { backgroundColor: 'green'}]}>
                 <Text style={styles.text}>Crear</Text>
             </TouchableOpacity>
             {show && (

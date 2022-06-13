@@ -50,9 +50,9 @@ export default function Tratamientos() {
                     <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>{tratamiento.nombre}</Text>
                 </TouchableOpacity>
             )}
-            <TouchableOpacity onPress={()=>pressNuevoTratamiento} 
-                style={[styles.touchable, {backgroundColor: 'green'}]}>
-                <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Nuevo tratamiento</Text>
+            <TouchableOpacity onPress={()=>pressNuevoTratamiento()} 
+                style={[styles.touchable, {backgroundColor: '#FFF2CC'}]}>
+                <Text style={{fontSize: 17, fontWeight: '400', color: 'black'}}>Nuevo tratamiento</Text>
             </TouchableOpacity>
             
         </View>
