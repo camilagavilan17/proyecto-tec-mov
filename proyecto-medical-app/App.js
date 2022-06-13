@@ -13,6 +13,7 @@ import Medicamentos from './screen/Medicamentos';
 import Controles from './screen/Controles';
 import Medicamento from './screen/Medicamento';
 import CrearNuevoMedicamento from './screen/CrearNuevoMedicamento';
+import NuevoControl from './screen/NuevoControl';
 
   const Stack = createNativeStackNavigator();
   
@@ -35,6 +36,7 @@ import CrearNuevoMedicamento from './screen/CrearNuevoMedicamento';
         <Stack.Screen name="Crear nuevo medicamento" component={CrearNuevoMedicamento} />
 
         <Stack.Screen name="Mis controles" component={Controles} />
+        <Stack.Screen name="Nuevo control" component={NuevoControl} />
       </Stack.Navigator>
     </NavigationContainer>
   );

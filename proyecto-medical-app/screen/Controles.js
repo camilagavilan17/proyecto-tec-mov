@@ -16,9 +16,9 @@ export default function Controles({navigation, route}) {
     const userid = user.uid;
     const [tratamientos, setTratamientos] = useState([]);
   
-    const pressGoControlMedico = (idTratamiento) => {
+    const pressGoNuevoControl = (idTratamiento) => {
         console.log("Press tratamiento nuevo");
-        navigation.navigate('Controles', {idTratamiento});
+        navigation.navigate('Nuevo control', {idTratamiento});
     }
     
     useEffect(() => {
@@ -41,7 +41,10 @@ export default function Controles({navigation, route}) {
         <View style={{ flex: 1, alignItems: 'center'}}>
             <Text>Mis controles</Text>
             <Text>Id tratamiento: {idTratamiento}</Text>
-            
+            <TouchableOpacity onPress={()=>pressGoNuevoControl(idTratamiento)} 
+                style={[styles.touchable, {backgroundColor: 'green'}]}>
+                <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Mis controles</Text>
+            </TouchableOpacity>
            
             
         </View>
