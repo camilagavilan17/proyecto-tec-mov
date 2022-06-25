@@ -14,24 +14,28 @@ export default function Controles({navigation, route}) {
     const auth = getAuth();
     const user = auth.currentUser;
     const userid = user.uid;
-    const [tratamientos, setTratamientos] = useState([]);
-  
+    const [controles, setControles] = useState([]);
+
+    const pressGoControl = (control) => {
+        console.log("Press control");
+        navigation.navigate('Control', {control});
+    }
     const pressGoNuevoControl = (idTratamiento) => {
-        console.log("Press tratamiento nuevo");
+        console.log("Press control nuevo");
         navigation.navigate('Nuevo control', {idTratamiento});
     }
     
     useEffect(() => {
-        const datos = collection(db, 'tratamientos');
-        const q = query(datos,  where('refuser','==',userid));
+        const datos = collection(db, 'controles');
+        const q = query(datos,  where('idTratamiento','==',idTratamiento));
         const unsuscribe = onSnapshot(q, querySnapshot => {
-            setTratamientos(querySnapshot.docs.map(doc => ({
+            setControles(querySnapshot.docs.map(doc => ({
                 id: doc.id,
-                nombre: doc.data().name,
-                fechaInicio: doc.data().initDate,
-                fechaTermino: doc.data().endDate,
-                refusuario: doc.data().refuser,
-                tipo: doc.data().tipoTratamiento,
+                idTratamiento: doc.data().idTratamiento,
+                fecha: doc.data().fecha,
+                recinto: doc.data().recinto,
+                detalle: doc.data().detalle,
+                medico: doc.data().medico,
             })))
         })
         return unsuscribe;
@@ -41,9 +45,17 @@ export default function Controles({navigation, route}) {
         <View style={{ flex: 1, alignItems: 'center'}}>
             <Text>Mis controles</Text>
             <Text>Id tratamiento: {idTratamiento}</Text>
+            {controles.map(control => 
+                <TouchableOpacity key={control.id} onPress={()=>pressGoControl(control)} 
+                    style={[styles.touchable, {backgroundColor: 'green'}]}>
+                    <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>{control.medico}</Text>
+                </TouchableOpacity>
+            )}
+
+
             <TouchableOpacity onPress={()=>pressGoNuevoControl(idTratamiento)} 
                 style={[styles.touchable, {backgroundColor: 'green'}]}>
-                <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Mis controles</Text>
+                <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Nuevo control</Text>
             </TouchableOpacity>
            
             

@@ -20,7 +20,7 @@ import { collection, addDoc } from 'firebase/firestore';
 
 // Firebase establece algunos temporizadores durante un período prolongado, lo que activará algunas advertencias. Apaguemos eso.
 LogBox.ignoreLogs([`Setting a timer for a long period`]);
-export default class NuevoControl extends React.Component {
+export default class NuevaReceta extends React.Component {
   state = {
     image: null,
     uploading: false,
@@ -193,12 +193,21 @@ async function uploadImageAsync(uri) {
     xhr.open("GET", uri, true);
     xhr.send(null);
   });
-
+/*
   const fileRef = ref(getStorage(), uuid.v4());
   const result = await uploadBytes(fileRef, blob);
-  
+  */
+  const storageRef = ref(getStorage(), uuid.v4()); 
+  const result = await uploadBytes(storageRef, blob).then(() => {
+    getDownloadURL(storageRef).then(function (url) {
+      addDoc(collection(db, 'recetas'), {
+        refControlMedico: '123',
+        urlImagen: url
+      });
+    });
+  });
 // Terminamos con el blob, cerramos y liberamos
   blob.close();
 
-  return await getDownloadURL(fileRef);
+  return await getDownloadURL(storageRef);
 }
