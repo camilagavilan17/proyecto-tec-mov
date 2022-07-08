@@ -9,24 +9,26 @@ import { collection, getDocs, onSnapshot, orderBy, query, QuerySnapshot, where }
 import { db } from '../firebase';
 
 export default function Tratamiento({navigation, route}) {
-    const idTratamiento = route.params.id;
+    const tratamiento = route.params.tratamiento;
+    const idTratamiento = tratamiento.id;
 
     const auth = getAuth();
     const user = auth.currentUser;
     const userid = user.uid;
     const [tratamientos, setTratamientos] = useState([]);
   
-    const pressGoMisFormularios = (idTratamiento) => {
-        console.log("Mis formularios");
-        console.log(idTratamiento);
-        navigation.navigate('Mis formularios', {idTratamiento});
+    const pressGoMisFormularios = (tratamiento) => {
+        //console.log("Mis formularios");
+        //console.log(tratamiento);
+        console.log("----------------------");
+        navigation.navigate('Mis formularios', {tratamiento});
     }
     const pressGoMisMedicamentos = (idTratamiento) => {
-        console.log("Mis medicamentos");
+        //console.log("Mis medicamentos");
         navigation.navigate('Mis medicamentos', {idTratamiento});
     }
     const pressGoMisControles = (idTratamiento) => {
-        console.log("Mis controles");
+        //console.log("Mis controles");
         navigation.navigate('Mis controles', {idTratamiento});
     }
     
@@ -48,9 +50,7 @@ export default function Tratamiento({navigation, route}) {
     
     return (
         <View style={{ flex: 1, alignItems: 'center'}}>
-            <Text>Mi tratamiento: {idTratamiento}</Text>
-            
-            <TouchableOpacity onPress={()=>pressGoMisFormularios(idTratamiento)} 
+            <TouchableOpacity onPress={()=>pressGoMisFormularios(tratamiento)} 
                 style={[styles.touchable, {backgroundColor: 'green'}]}>
                 <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Mis formularios</Text>
             </TouchableOpacity>

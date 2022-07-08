@@ -86,15 +86,7 @@ export default function CrearNuevoTratamiento({navigation, route}) {
         }
         try {
             await addDoc(collection(db, 'tratamientos'), newTreatment);
-            /*firestore()
-            .collection('Users')
-            .add({
-                name: 'Pablo',
-                age: 24,
-            })
-            .then(() => {
-                console.log('Ready');
-            });*/
+           
         }catch(e){
             console.log(e);
         } finally{

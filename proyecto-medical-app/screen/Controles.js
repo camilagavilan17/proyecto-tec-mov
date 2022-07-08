@@ -43,8 +43,7 @@ export default function Controles({navigation, route}) {
     
     return (
         <View style={{ flex: 1, alignItems: 'center'}}>
-            <Text>Mis controles</Text>
-            <Text>Id tratamiento: {idTratamiento}</Text>
+            
             {controles.map(control => 
                 <TouchableOpacity key={control.id} onPress={()=>pressGoControl(control)} 
                     style={[styles.touchable, {backgroundColor: 'green'}]}>

@@ -19,11 +19,11 @@ export default function Tratamientos() {
         console.log("Nuevo tratamiento");
         navigation.navigate('Nuevo tratamiento');
     }
-    const pressGoTratamiento = (id) => {
+    const pressGoTratamiento = (tratamiento) => {
 
         console.log("Tratamiento");
-        console.log(id);
-        navigation.navigate('Tratamiento', {id});
+        console.log(tratamiento);
+        navigation.navigate('Tratamiento', {tratamiento});
     }
     useEffect(() => {
         const datos = collection(db, 'tratamientos');
@@ -31,11 +31,11 @@ export default function Tratamientos() {
         const unsuscribe = onSnapshot(q, querySnapshot => {
             setTratamientos(querySnapshot.docs.map(doc => ({
                 id: doc.id,
-                nombre: doc.data().name,
-                fechaInicio: doc.data().initDate,
-                fechaTermino: doc.data().endDate,
-                refusuario: doc.data().refuser,
-                tipo: doc.data().tipoTratamiento,
+                name: doc.data().name,
+                initDate: doc.data().initDate,
+                endDate: doc.data().endDate,
+                refuser: doc.data().refuser,
+                tipoTratamiento: doc.data().tipoTratamiento,
             })))
         })
         return unsuscribe;
@@ -43,11 +43,11 @@ export default function Tratamientos() {
     
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Mis tratamientos</Text>
+           
             {tratamientos.map(tratamiento => 
-                <TouchableOpacity onPress={()=>pressGoTratamiento(tratamiento.id)} 
+                <TouchableOpacity key={tratamiento.id} onPress={()=>pressGoTratamiento(tratamiento)} 
                     style={[styles.touchable, {backgroundColor: 'green'}]}>
-                    <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>{tratamiento.nombre}</Text>
+                    <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>{tratamiento.name}</Text>
                 </TouchableOpacity>
             )}
             <TouchableOpacity onPress={()=>pressNuevoTratamiento()} 

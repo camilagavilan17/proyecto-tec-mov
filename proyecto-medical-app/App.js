@@ -6,6 +6,7 @@ import LoginScreen  from './screen/LoginScreen';
 import HomeScreen  from './screen/HomeScreen';
 import Tratamientos  from './screen/Tratamientos';
 import Formularios from './screen/Formularios';
+import Formulario from './screen/Formulario';
 import NuevoTratamiento from './screen/NuevoTratamiento';
 import CrearNuevoTratamiento from './screen/CrearNuevoTratamiento';
 import Tratamiento from './screen/Tratamiento';
@@ -32,6 +33,7 @@ import CrearNuevoControl from './screen/CrearNuevoControl';
         <Stack.Screen name="Crear nuevo tratamiento" component={CrearNuevoTratamiento} />
         
         <Stack.Screen name="Mis formularios" component={Formularios} />
+        <Stack.Screen name="Formulario" component={Formulario} />
 
         <Stack.Screen name="Mis medicamentos" component={Medicamentos} />
         <Stack.Screen name="Medicamento" component={Medicamento} />

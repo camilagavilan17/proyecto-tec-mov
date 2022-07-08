@@ -18,7 +18,6 @@ export default function Medicamento({navigation, route}) {
     
     return (
         <View style={{ flex: 1, alignItems: 'center'}}>
-            <Text>Mi medicamento</Text>
             <Text>{medicamento.nombre}</Text>
             
             

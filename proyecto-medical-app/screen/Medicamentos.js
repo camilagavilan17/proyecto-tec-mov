@@ -56,7 +56,7 @@ export default function Medicamentos({navigation, route}) {
             */
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <Text>Mis medicamentos</Text>
+           
             {medicamentos.map(medicamento => 
                 <TouchableOpacity onPress={()=>pressGoMedicamento(medicamento)} 
                     style={[styles.touchable, {backgroundColor: 'green'}]}>
