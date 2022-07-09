@@ -70,29 +70,32 @@ export default function Formularios({navigation, route}) {
             }
         });
         //setUltimaFecha(formularios[0].fecha.toDate());
-        console.log("ULTIMA FECHA CREADA");
-        console.log(formularios[0]);
-        //console.log(formularios[0].fecha.toDate());
+        //console.log("ULTIMA FECHA CREADA");
+        //console.log(formularios[0]);
+        console.log("Uuuuuuuu");
+        //console.log(formatoFecha(formularios[0].fecha.toDate()));
         //console.log(formatoFecha(ultimaFecha));
-        let facha = new Date(fechaInicial);
-        let fachaFinal = new Date(fechaFinal);
-        while (facha.getTime() < fechaFinal.getTime()) {//falta el valor igual
-            //console.log("FACHA: ");
-            //console.log(formatoFecha(facha));
-            crearFormulariosVacios(new Date(facha));
-            console.log("Crear formulario para: "+formatoFecha(facha));
-            if(formatoFecha(facha)==formatoFecha(new Date())){
-                console.log("ajale");
-                break;
-            }
+        if(formularios[0]){
+            let facha = new Date(formularios[0].fecha.toDate());
             facha = anadirDia(facha);
-            //console.log("Fecha final");
-            //console.log(formatoFecha(fachaFinal));
-            
+            console.log("FECHA INICIAL: "+fechaInicial);
+            let fachaFinal = new Date(fechaFinal);
+            while (facha.getTime() < fechaFinal.getTime()) {//falta el valor igual
+                //facha = anadirDia(facha);
+                console.log("FACHA: ");
+                console.log(formatoFecha(facha));
+                crearFormulariosVacios(new Date(facha));
+                console.log("Crear formulario para: "+formatoFecha(facha));
+                if(formatoFecha(facha)==formatoFecha(new Date())){
+                    console.log("ajale");
+                    break;
+                }
+                facha = anadirDia(facha);
+                //console.log("Fecha final");
+                //console.log(formatoFecha(fachaFinal));
+                
+            }
         }
-        //console.log("Fecha fin while 1: "+formatoFecha(facha));
-        //console.log("Fecha fin while 2: "+formatoFecha(fachaFinal));
-        
     }, [formularios]);
     function color(respondido) {
        
