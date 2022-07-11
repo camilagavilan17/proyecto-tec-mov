@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import {styles} from '../estilos/style';
 import { getAuth } from 'firebase/auth';
 import { async, querystring } from '@firebase/util';
-import { collection, getDocs, onSnapshot, orderBy, query, QuerySnapshot, where } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot, orderBy, query, QuerySnapshot, where, addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
 export default function Formularios({navigation, route}) {
@@ -25,10 +25,13 @@ export default function Formularios({navigation, route}) {
     const user = auth.currentUser;
     const userid = user.uid;
     const [formularios, setFormularios] = useState([]);
+    const [formulariosMuestra, setFormulariosMuestra] = useState([]);
+    const [nuevosFormularios, setNuevosFormularios] = useState([]);
     const [formulario, setFormulario] = useState();
-    const [num, setNum] = useState(0);
-    const [existe, setExiste] = useState(false);
+    const [hecho, setHecho] = useState(false);
     const [ultimaFecha, setUltimaFecha] = useState();
+    const [num, setNum] = useState(0);
+
     const pressGoFormulario = (formulario) => {
         console.log("Formulario");
         console.log(formulario);
@@ -44,10 +47,12 @@ export default function Formularios({navigation, route}) {
         return res;
     }
     useEffect(() => {
+        console.log("INICIO");
+        var formulariosAux = [];
         const datos = collection(db, 'formularios');
-        const q = query(datos,  where('refTratamiento','==',tratamiento.id));
+        const q = query(datos,  orderBy('fecha','desc'));
         const unsuscribe = onSnapshot(q, querySnapshot => {
-            setFormularios(querySnapshot.docs.map(doc => ({
+            formulariosAux.push(querySnapshot.docs.map(doc => ({
                 id: doc.id,
                 refTratamiento: doc.data().refTratamiento,
                 tipo: doc.data().tipo,
@@ -55,50 +60,64 @@ export default function Formularios({navigation, route}) {
                 respondido: doc.data().respondido,
             })))
         })
-        return unsuscribe;
-    }, []);
-    
-
-    useEffect(() => {
-        formularios.sort((o1, o2)=> {
-            if(o1.fecha < o2.fecha){
-                return 1;
-            }else if(o1.fecha > o2.fecha){
-                return -1;
-            }else{
-                return 0;
-            }
-        });
-        //setUltimaFecha(formularios[0].fecha.toDate());
-        //console.log("ULTIMA FECHA CREADA");
-        //console.log(formularios[0]);
-        console.log("Uuuuuuuu");
-        //console.log(formatoFecha(formularios[0].fecha.toDate()));
-        //console.log(formatoFecha(ultimaFecha));
-        if(formularios[0]){
-            let facha = new Date(formularios[0].fecha.toDate());
-            facha = anadirDia(facha);
-            console.log("FECHA INICIAL: "+fechaInicial);
-            let fachaFinal = new Date(fechaFinal);
-            while (facha.getTime() < fechaFinal.getTime()) {//falta el valor igual
-                //facha = anadirDia(facha);
-                console.log("FACHA: ");
-                console.log(formatoFecha(facha));
-                crearFormulariosVacios(new Date(facha));
-                console.log("Crear formulario para: "+formatoFecha(facha));
-                if(formatoFecha(facha)==formatoFecha(new Date())){
-                    console.log("ajale");
-                    break;
+        var formulariosMuestraAux = [];
+        for (let index = 0; index < formulariosAux.length; index++) {
+            console.log("63 INDEX: "+index);
+            if(formulariosAux[index].refTratamiento==tratamiento.id){
+                console.log("65 Tratamiento index");
+                let fecha = new Date(formulariosAux[index].fecha.toDate());
+                let fechaHoy = new Date();
+                if(fecha < fechaHoy){
+                    console.log("69 Formulario de hoy");
+                    const element = formulariosAux[index];
+                    formulariosMuestraAux.push(element);
                 }
-                facha = anadirDia(facha);
-                //console.log("Fecha final");
-                //console.log(formatoFecha(fachaFinal));
-                
             }
         }
-    }, [formularios]);
+        setFormulariosMuestra(formulariosMuestraAux);
+        var formulariosNuevos = [];
+        if(formulariosMuestraAux.length==0){
+            let facha = new Date(fechaInicial);
+            while (facha < fechaFinal) {
+                console.log("79 FACHAAAA: ");
+                console.log(formatoFecha(facha));
+                const nuevoFormulario = {
+                    refTratamiento: tratamiento.id,
+                    fecha: facha,
+                    respondido: false,
+                }
+                formulariosNuevos.push(nuevoFormulario);
+                //crearFormulariosVacios(nuevoFormulario);
+                //console.log("Crear formulario para: "+formatoFecha(facha));
+                facha = anadirDia(facha);
+            }
+            console.log("91 Info datos largo: "+formulariosNuevos.length);
+            //setNuevosFormularios(datosNuevos);
+            //setNuevosFormularios(datosNuevos);
+
+        }
+        else{
+            setHecho(true);
+        }
+
+        if(!hecho){
+            console.log("NO HECHO");
+            console.log("Nuevos formularios largo: "+formulariosNuevos.length);
+            for (let index = 0; index < formulariosNuevos.length; index++) {
+                console.log("104 Index: "+index);
+                console.log("Formulario nuevito:");
+                const element = formulariosNuevos[index];
+                crearFormulariosVacios(element);
+            }
+            setHecho(true);
+            setNum(num+1);
+        }
+        else{
+            console.log("HECHO");
+        }
+        return unsuscribe;
+    }, [hecho]);
     function color(respondido) {
-       
         if(respondido){
             return 'green';
         }
@@ -107,40 +126,51 @@ export default function Formularios({navigation, route}) {
         }
     }
     
-    const crearFormulariosVacios = async (fechaDato) => {
-        
-        const nuevoFormulario = {
-            refTratamiento: tratamiento.id,
-            fecha: fechaDato,
-            respondido: false,
-        }
-        console.log("New trata");
-        console.log(nuevoFormulario);
-        console.log(formatoFecha(fechaDato));
+    const crearFormulariosVacios = async (element) => {
         /*
-        try {
-            await addDoc(collection(db, 'formularios'), nuevoFormulario);
-        }catch(e){
-            console.log(e);
+        if(!hecho){
+            console.log("NO HECHO");
+            console.log("Nuevos formularios largo: "+nuevosFormularios.length);
+            for (let index = 0; index < nuevosFormularios.length; index++) {
+                console.log("Formulario nuevito:");
+                const element = nuevosFormularios[index];
+                console.log(element);
+                
+                try {
+                    await addDoc(collection(db, 'formularios'), element);
+                }catch(e){
+                    console.log(e);
+                } 
+                
+            
+            }
+            setHecho(true);
+        }
+        else{
+            console.log("HECHO");
         }
         */
+        console.log("Nuevo formulario");
+        console.log(element);
+        
+        try {
+            await addDoc(collection(db, 'formularios'), element);
+        }catch(e){
+            console.log(e);
+        } 
+      
+        
     }
-    console.log("123");
-    const fechaActual = new Date();
-    console.log(formatoFecha(fechaActual));
-    const fechaHoy = fechaActual.getFullYear()+'-'+(fechaActual.getMonth()+1)+'-'+fechaActual.getDate();
+
     return (
         <View style={{ flex: 1, alignItems: 'center' }}>
-            
-            
-
-            {formularios.map(formulario => 
+            {hecho && 
+            formulariosMuestra.map(formulario => 
                 <TouchableOpacity key={formulario.fecha.toDate()} onPress={()=>pressGoFormulario(formulario)} 
                     style={[styles.touchable, {backgroundColor: color(formulario.respondido) }]}>
                     <Text style={{fontSize: 17, fontWeight: '400', color: 'black'}}>{formatoFecha(formulario.fecha.toDate())}</Text>
                 </TouchableOpacity>
             )}
-
         </View>
     );
 }
