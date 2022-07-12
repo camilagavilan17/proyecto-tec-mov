@@ -17,13 +17,10 @@ export default function LoginScreen() {
   const handleCreateAccount = () => {
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      console.log('Cuenta creada!')
       Alert.alert("Cuenta creada!")
       const user = userCredential.user;
-      console.log(user)
     })
     .catch(error => {
-      console.log(error)
       Alert.alert("Error de autentificación")
     })
   }
@@ -33,14 +30,10 @@ export default function LoginScreen() {
     
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      console.log('Conectado!');
       const user = userCredential.user;
-      console.log("AAA");
-      console.log(user)
       navigation.navigate('Home');
     })
     .catch(error => {
-      console.log(error)
       Alert.alert("Correo o contraseña equivocada!")
     })
     
