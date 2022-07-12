@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -25,9 +25,6 @@ import controlesStack from './routes/controlesStack';
   }
   
   export default function App() {
-
-  const [user, setUser] = useState('');
-  const auth = getAuth();
 
   return (
     <NavigationContainer>

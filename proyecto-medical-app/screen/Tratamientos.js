@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import { FlatList, Image, Text, StyleSheet, View, ScrollView, TouchableOpacity, TextInput, Button, Alert } from 'react-native';
-import { BlurView } from 'expo-blur';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import {styles} from '../estilos/style';
+import { styles } from '../estilos/style';
 import { getAuth } from 'firebase/auth';
-import { async, querystring } from '@firebase/util';
-import { collection, getDocs, onSnapshot, orderBy, query, QuerySnapshot, where } from 'firebase/firestore';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 
 export default function Tratamientos() {
@@ -19,23 +17,24 @@ export default function Tratamientos() {
         console.log("Nuevo tratamiento");
         navigation.navigate('Nuevo tratamiento');
     }
-    const pressGoTratamiento = (id) => {
+    const pressGoTratamiento = (tratamiento) => {
 
         console.log("Tratamiento");
-        console.log(id);
-        navigation.navigate('Tratamiento', {id});
+        console.log(tratamiento);
+        navigation.navigate('Tratamiento', {tratamiento});
     }
     useEffect(() => {
-        const datos = collection(db, 'tratamientos');
+        const datos = collection(db, 'tratamientos');//falta recargar los tratamientos para obtener el true que deberiamos hacer
         const q = query(datos,  where('refuser','==',userid));
         const unsuscribe = onSnapshot(q, querySnapshot => {
             setTratamientos(querySnapshot.docs.map(doc => ({
                 id: doc.id,
-                nombre: doc.data().name,
-                fechaInicio: doc.data().initDate,
-                fechaTermino: doc.data().endDate,
-                refusuario: doc.data().refuser,
-                tipo: doc.data().tipoTratamiento,
+                name: doc.data().name,
+                initDate: doc.data().initDate,
+                endDate: doc.data().endDate,
+                refuser: doc.data().refuser,
+                tipoTratamiento: doc.data().tipoTratamiento,
+                formulariosCreados: doc.data().formulariosCreados,
             })))
         })
         return unsuscribe;
@@ -43,11 +42,11 @@ export default function Tratamientos() {
     
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Mis tratamientos</Text>
+           
             {tratamientos.map(tratamiento => 
-                <TouchableOpacity onPress={()=>pressGoTratamiento(tratamiento.id)} 
+                <TouchableOpacity key={tratamiento.id} onPress={()=>pressGoTratamiento(tratamiento)} 
                     style={[styles.touchable, {backgroundColor: 'green'}]}>
-                    <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>{tratamiento.nombre}</Text>
+                    <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>{tratamiento.name}</Text>
                 </TouchableOpacity>
             )}
             <TouchableOpacity onPress={()=>pressNuevoTratamiento()} 

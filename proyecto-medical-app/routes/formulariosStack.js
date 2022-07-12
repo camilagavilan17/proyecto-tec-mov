@@ -1,5 +1,4 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import Header from '../shared/Header';
 import Formularios from '../screen/Formularios';
 
 const Stack = createStackNavigator();

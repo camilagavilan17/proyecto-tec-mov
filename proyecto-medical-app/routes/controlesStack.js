@@ -1,5 +1,4 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import Header from '../shared/Header';
 import Controles from '../screen/Controles';
 import Control from '../screen/Control';
 import CrearNuevoControl from '../screen/CrearNuevoControl';

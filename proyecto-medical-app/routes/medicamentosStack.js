@@ -1,5 +1,4 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import Header from '../shared/Header';
 import Medicamentos from '../screen/Medicamentos';
 import Medicamento from '../screen/Medicamento'
 import CrearNuevoMedicamento from '../screen/CrearNuevoMedicamento';

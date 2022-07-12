@@ -1,48 +1,55 @@
-import React, {useEffect, useState} from 'react';
-import { FlatList, Image, Text, StyleSheet, View, ScrollView, TouchableOpacity, TextInput, Button, Alert } from 'react-native';
-import { BlurView } from 'expo-blur';
-import { useNavigation } from '@react-navigation/native';
+import React, {useState} from 'react';
+import { Text, View, TouchableOpacity, TextInput } from 'react-native';
 import {styles} from '../estilos/style';
 import { getAuth } from 'firebase/auth';
-import { async, querystring } from '@firebase/util';
-import { collection, getDocs, onSnapshot, orderBy, query, QuerySnapshot, where } from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
 export default function Formulario({navigation, route}) {
-    const idTratamiento = route.params.id;
-
+    const [formularios, setFormularios] = useState();
+    const formulario = route.params.formulario;
+    const tratamiento = route.params.tratamiento;
+    console.log("HOLIWI");
+    console.log(formulario);
     const auth = getAuth();
     const user = auth.currentUser;
     const userid = user.uid;
     const [tratamientos, setTratamientos] = useState([]);
-  
-    const pressGoFormulario = (idTratamiento) => {
-        //console.log("Press tratamiento nuevo");
-        //navigation.navigate('Nuevo tratamiento', {idTratamiento});
+    const idTratamiento = "9OMYb50MufbeBDV10QoO";
+    const fecha = new Date();
+    console.log("################");
+    console.log("T: "+tratamiento.id);
+    console.log("F: "+formulario.id);
+    console.log("F: "+formulario.respuesta1);
+    //obtener datos
+    const [respuesta1, setRespuesta1] = useState(formulario.respuesta1);
+    function formatoFecha(fecha) {
+        var fechaActual = fecha.getDate()+'-'+(fecha.getMonth()+1)+'-'+fecha.getFullYear();
+        return fechaActual;
     }
-   
-    
-    useEffect(() => {
-        const datos = collection(db, 'tratamientos');
-        const q = query(datos,  where('refuser','==',userid));
-        const unsuscribe = onSnapshot(q, querySnapshot => {
-            setTratamientos(querySnapshot.docs.map(doc => ({
-                id: doc.id,
-                nombre: doc.data().name,
-                fechaInicio: doc.data().initDate,
-                fechaTermino: doc.data().endDate,
-                refusuario: doc.data().refuser,
-                tipo: doc.data().tipoTratamiento,
-            })))
+
+    const pressGuardarFormulario = () => {
+        
+        const docRef = doc(db, 'formularios', formulario.id);
+        updateDoc(docRef,{
+            respondido: true,
+            respuesta1: respuesta1,
         })
-        return unsuscribe;
-    }, []);
+        navigation.navigate('Mis formularios', {tratamiento});
+    }
     
     return (
         <View style={{ flex: 1, alignItems: 'center'}}>
-            <Text>Mi formulario</Text>
+            <Text>{formulario.fecha && formatoFecha(formulario.fecha.toDate())}</Text>
+
+            <Text style={{fontSize: 17, fontWeight: '400', color: 'black'}}>¿Sintió algún dolor hoy?</Text>
+            <TextInput value={respuesta1} onChangeText={(text) => setRespuesta1(text)} style={styles.input} placeholder="Respuesta 1" />
             
-           
+            <TouchableOpacity onPress={pressGuardarFormulario} 
+                style={[styles.touchable, {backgroundColor: '#FFF2CC'}]}>
+                <Text style={{fontSize: 17, fontWeight: '400', color: 'black'}}>Guardar formulario</Text>
+            </TouchableOpacity>
+               
             
         </View>
     );

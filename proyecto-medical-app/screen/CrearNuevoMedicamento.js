@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import { Text, View, TouchableOpacity, TextInput } from 'react-native';
 import {styles} from '../estilos/style';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import { Platform } from 'react-native-web';
 import { getAuth } from 'firebase/auth';
 import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
