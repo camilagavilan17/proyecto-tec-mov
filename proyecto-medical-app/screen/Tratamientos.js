@@ -26,7 +26,7 @@ export default function Tratamientos() {
         navigation.navigate('Tratamiento', {tratamiento});
     }
     useEffect(() => {
-        const datos = collection(db, 'tratamientos');
+        const datos = collection(db, 'tratamientos');//falta recargar los tratamientos para obtener el true que deberiamos hacer
         const q = query(datos,  where('refuser','==',userid));
         const unsuscribe = onSnapshot(q, querySnapshot => {
             setTratamientos(querySnapshot.docs.map(doc => ({
@@ -36,6 +36,7 @@ export default function Tratamientos() {
                 endDate: doc.data().endDate,
                 refuser: doc.data().refuser,
                 tipoTratamiento: doc.data().tipoTratamiento,
+                formulariosCreados: doc.data().formulariosCreados,
             })))
         })
         return unsuscribe;

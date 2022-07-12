@@ -15,7 +15,6 @@ export default function Tratamiento({navigation, route}) {
     const auth = getAuth();
     const user = auth.currentUser;
     const userid = user.uid;
-    const [tratamientos, setTratamientos] = useState([]);
   
     const pressGoMisFormularios = (tratamiento) => {
         //console.log("Mis formularios");
@@ -31,22 +30,6 @@ export default function Tratamiento({navigation, route}) {
         //console.log("Mis controles");
         navigation.navigate('Mis controles', {idTratamiento});
     }
-    
-    useEffect(() => {
-        const datos = collection(db, 'tratamientos');
-        const q = query(datos,  where('refuser','==',userid));
-        const unsuscribe = onSnapshot(q, querySnapshot => {
-            setTratamientos(querySnapshot.docs.map(doc => ({
-                id: doc.id,
-                nombre: doc.data().name,
-                fechaInicio: doc.data().initDate,
-                fechaTermino: doc.data().endDate,
-                refusuario: doc.data().refuser,
-                tipo: doc.data().tipoTratamiento,
-            })))
-        })
-        return unsuscribe;
-    }, []);
     
     return (
         <View style={{ flex: 1, alignItems: 'center'}}>
