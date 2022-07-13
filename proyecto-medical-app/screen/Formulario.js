@@ -20,10 +20,7 @@ export default function Formulario({navigation, route}) {
     const [tratamientos, setTratamientos] = useState([]);
     const idTratamiento = "9OMYb50MufbeBDV10QoO";
     const fecha = new Date();
-    console.log("################");
-    console.log("T: "+tratamiento.id);
-    console.log("F: "+formulario.id);
-    console.log("F: "+formulario.respuesta1);
+  
     //obtener datos
     const [respuesta1, setRespuesta1] = useState(formulario.respuesta1);
     function formatoFecha(fecha) {

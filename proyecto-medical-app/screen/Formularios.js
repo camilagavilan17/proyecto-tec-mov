@@ -19,6 +19,12 @@ export default function Formularios({navigation, route}) {
     const fechaInicial = new Date(tratamiento.initDate.toDate());
     const [listo, setListo] = useState(false);
 
+    const actualizar = () => {
+        //console.log("Mis formularios");
+        //console.log(tratamiento);
+        console.log("----------------------");
+        navigation.navigate('Tratamiento', {tratamiento});
+    }
     //console.log("Get año");
     //console.log(fechaFinal.getDate());
     //console.log(fechaFinal);
@@ -188,6 +194,10 @@ export default function Formularios({navigation, route}) {
 
     return (
         <View style={{ flex: 1, alignItems: 'center' }}>
+            <TouchableOpacity onPress={()=>actualizar()} 
+                style={[styles.touchable, {backgroundColor: '#FFF2CC'}]}>
+                <Text style={{fontSize: 17, fontWeight: '400', color: 'black'}}>Guardar cambios</Text>
+            </TouchableOpacity>
             {hecho && 
             formulariosMuestra.map(formulario => 
                 <TouchableOpacity key={formulario.fecha.toDate()} onPress={()=>pressGoFormulario(formulario)} 
@@ -195,6 +205,7 @@ export default function Formularios({navigation, route}) {
                     <Text style={{fontSize: 17, fontWeight: '400', color: 'black'}}>{formatoFecha(formulario.fecha.toDate())}</Text>
                 </TouchableOpacity>
             )}
+            
         </View>
     );
 }

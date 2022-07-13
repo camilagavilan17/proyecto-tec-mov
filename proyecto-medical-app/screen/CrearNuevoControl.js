@@ -68,12 +68,17 @@ export default function CrearNuevoControl({navigation, route}) {
         setMode(currentMode);
     }
     const pressCrear = async () => {
+        const ubicacion = {
+            latitude: 0,
+            longitude: 0
+        }
         const nuevoControl = {
             idTratamiento: idTratamiento,
             medico: nombreMedico,
             fecha: date,
             recinto: recinto,
             detalle: detalle,
+            ubicacion: ubicacion,
         }
         try {
             await addDoc(collection(db, 'controles'), nuevoControl);

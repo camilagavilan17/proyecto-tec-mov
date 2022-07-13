@@ -36,6 +36,7 @@ export default function Controles({navigation, route}) {
                 recinto: doc.data().recinto,
                 detalle: doc.data().detalle,
                 medico: doc.data().medico,
+                ubicacion: doc.data().ubicacion,
             })))
         })
         return unsuscribe;
