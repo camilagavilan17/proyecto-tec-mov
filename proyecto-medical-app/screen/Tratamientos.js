@@ -43,11 +43,11 @@ export default function Tratamientos() {
     }, []);
     
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={[styles.container, { justifyContent: 'center' }]}>
            
             {tratamientos.map(tratamiento => 
                 <TouchableOpacity key={tratamiento.id} onPress={()=>pressGoTratamiento(tratamiento)} 
-                    style={[styles.touchable, {backgroundColor: 'green'}]}>
+                    style={[styles.button2, {backgroundColor: 'green'}]}>
                     <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>{tratamiento.name}</Text>
                 </TouchableOpacity>
             )}

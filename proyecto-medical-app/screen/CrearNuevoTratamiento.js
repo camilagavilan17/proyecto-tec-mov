@@ -34,8 +34,8 @@ export default function CrearNuevoTratamiento({navigation, route}) {
     const [show, setShow] = useState(false);
     const [show2, setShow2] = useState(false);
 
-    const [text, setText] = useState('Empty');
-    const [text2, setText2] = useState('Empty');
+    const [text, setText] = useState('');
+    const [text2, setText2] = useState('');
    
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -83,6 +83,7 @@ export default function CrearNuevoTratamiento({navigation, route}) {
             endDate: date2,
             refuser: userid,
             tipoTratamiento: tipo,
+            formulariosCreados: false,
         }
         try {
             await addDoc(collection(db, 'tratamientos'), newTreatment);
@@ -96,16 +97,16 @@ export default function CrearNuevoTratamiento({navigation, route}) {
     
     }
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Crear tratamiento</Text>
-            
-            <TextInput style={{borderWidth:1, padding:7, width: 300}} onChangeText={(val) => setNombre(val)}/>
-            <Text>{text}</Text>
-            <TouchableOpacity onPress={() => showMode('date')} style={[styles.touchable, { backgroundColor: 'blue'}]}>
+        <View style={[styles.container, { justifyContent: 'center' }]}>
+            <Text style={styles.textTitle}>Crear tratamiento</Text>
+            <Text style={styles.text}>Nombre del tratamiento</Text>
+            <TextInput style={styles.input} onChangeText={(val) => setNombre(val)}/>
+            {text.length>0 &&<Text style={styles.text}>{text}</Text>}
+            <TouchableOpacity onPress={() => showMode('date')} style={[styles.touchable, { backgroundColor: '#1B72B5'}]}>
                 <Text style={styles.text}>Seleccionar fecha inicio</Text>
             </TouchableOpacity>
-            <Text>{text2}</Text>
-            <TouchableOpacity onPress={() => showMode2('date')} style={[styles.touchable, { backgroundColor: 'blue'}]}>
+            {text2.length>0 && <Text style={styles.text}>{text2}</Text>}
+            <TouchableOpacity onPress={() => showMode2('date')} style={[styles.touchable, { backgroundColor: '#1B72B5'}]}>
                 <Text style={styles.text}>Seleccionar fecha termino</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>pressCrear()} style={[styles.touchable, { backgroundColor: 'green'}]}>

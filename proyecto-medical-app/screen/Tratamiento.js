@@ -32,17 +32,17 @@ export default function Tratamiento({navigation, route}) {
     }
     
     return (
-        <View style={{ flex: 1, alignItems: 'center'}}>
+        <View style={[styles.container, { justifyContent: 'center' }]}>
             <TouchableOpacity onPress={()=>pressGoMisFormularios(tratamiento)} 
-                style={[styles.touchable, {backgroundColor: 'green'}]}>
+                style={[styles.button2, {backgroundColor: 'green'}]}>
                 <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Mis formularios</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>pressGoMisMedicamentos(idTratamiento)} 
-                style={[styles.touchable, {backgroundColor: 'green'}]}>
+                style={[styles.button2, {backgroundColor: 'green'}]}>
                 <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Mis medicamentos</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>pressGoMisControles(idTratamiento)} 
-                style={[styles.touchable, {backgroundColor: 'green'}]}>
+                style={[styles.button2, {backgroundColor: 'green'}]}>
                 <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Mis controles</Text>
             </TouchableOpacity>
             

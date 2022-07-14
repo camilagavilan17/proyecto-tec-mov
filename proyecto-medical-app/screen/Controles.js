@@ -43,19 +43,19 @@ export default function Controles({navigation, route}) {
     }, []);
     
     return (
-        <View style={{ flex: 1, alignItems: 'center'}}>
+        <View style={[styles.container, { justifyContent: 'center' }]}>
             
             {controles.map(control => 
                 <TouchableOpacity key={control.id} onPress={()=>pressGoControl(control)} 
-                    style={[styles.touchable, {backgroundColor: 'green'}]}>
+                    style={[styles.button2, {backgroundColor: 'green'}]}>
                     <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>{control.medico}</Text>
                 </TouchableOpacity>
             )}
 
 
             <TouchableOpacity onPress={()=>pressGoNuevoControl(idTratamiento)} 
-                style={[styles.touchable, {backgroundColor: 'green'}]}>
-                <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Nuevo control</Text>
+                style={[styles.touchable, {backgroundColor: '#FFF2CC'}]}>
+                <Text style={{fontSize: 17, fontWeight: '400', color: 'black'}}>Nuevo control</Text>
             </TouchableOpacity>
            
             

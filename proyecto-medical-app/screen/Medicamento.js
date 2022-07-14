@@ -17,8 +17,10 @@ export default function Medicamento({navigation, route}) {
     const userid = user.uid;
     
     return (
-        <View style={{ flex: 1, alignItems: 'center'}}>
-            <Text>{medicamento.nombre}</Text>
+        <View  style={[styles.container, { justifyContent: 'center' }]}>
+            <Text style={styles.textTitle}>{medicamento.nombre}</Text>
+            <Text style={styles.text}>Inicio de toma de medicamento: {medicamento.hora}</Text>
+            <Text style={styles.text}>Tomar cada {medicamento.frecuenciaHora} horas</Text>
             
             
            

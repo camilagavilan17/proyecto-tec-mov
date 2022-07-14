@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#1CA39F',
+        alignItems: 'center',
     },
     map:{
         width: '100%',
@@ -12,9 +14,9 @@ export const styles = StyleSheet.create({
         color: 'white',
         height: 50,
         width: '70%',
-        marginTop: 40,
         marginLeft: '5%',
         marginRight: 12,
+        marginBottom: 20,
         borderWidth: 1,
         padding: 10,
         borderRadius: 10,
@@ -39,7 +41,7 @@ export const styles = StyleSheet.create({
   
     },
     text: {
-        fontSize: 17, 
+        fontSize: 20, 
         fontWeight: '400', 
         color: 'white',
     },
@@ -52,7 +54,7 @@ export const styles = StyleSheet.create({
         color: "white",
         fontSize: 26,
         textAlign: "center",
-        marginTop: 20,
+        marginBottom: 20,
     },
     touchable:{
         width: 250,
@@ -72,6 +74,19 @@ export const styles = StyleSheet.create({
         borderColor: '#002552',
         backgroundColor: '#6C8EBF',
         height: 50,
+        borderRadius: 10,
+        justifyContent: "center",
+        marginVertical: 10,
+        borderWidth: 2,
+        fontSize: 26,
+    },
+    button2: {
+        marginTop: 10,
+        alignItems: "center",
+        width: '85%',
+        borderColor: '#002552',
+        backgroundColor: '#6C8EBF',
+        height: 60,
         borderRadius: 10,
         justifyContent: "center",
         marginVertical: 10,

@@ -30,8 +30,8 @@ export default function CrearNuevoControl({navigation, route}) {
     const [show, setShow] = useState(false);
     const [show2, setShow2] = useState(false);
 
-    const [text, setText] = useState('Empty');
-    const [text2, setText2] = useState('Empty');
+    const [text, setText] = useState('');
+    const [text2, setText2] = useState('');
    
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -91,21 +91,22 @@ export default function CrearNuevoControl({navigation, route}) {
     
     }
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Crear nuevo control</Text>
-            <Text>Medico</Text>
-            <TextInput style={{borderWidth:1, padding:7, width: 300}} onChangeText={(val) => setNombreMedico(val)}/>
+        <View style={[styles.container, { justifyContent: 'center' }]}>
+            <Text style={styles.textTitle}>Crear nuevo control</Text>
+            
+            <Text style={styles.text}>Nombre del médico</Text>
+            <TextInput style={styles.input} onChangeText={(val) => setNombreMedico(val)}/>
 
-            <Text>{text}</Text>
-            <TouchableOpacity onPress={() => showMode('date')} style={[styles.touchable, { backgroundColor: 'blue'}]}>
+            {text.length>0 && <Text style={styles.text}>{text}</Text>}
+            <TouchableOpacity onPress={() => showMode('date')} style={[styles.touchable, { backgroundColor: '#1B72B5'}]}>
                 <Text style={styles.text}>Seleccionar fecha</Text>
             </TouchableOpacity>
 
-            <Text>Recinto</Text>
-            <TextInput style={{borderWidth:1, padding:7, width: 300}} onChangeText={(val) => setRecinto(val)}/>
+            <Text style={styles.text}>Recinto</Text>
+            <TextInput style={styles.input} onChangeText={(val) => setRecinto(val)}/>
 
-            <Text>Detalle</Text>
-            <TextInput style={{borderWidth:1, padding:7, width: 300}} onChangeText={(val) => setDetalle(val)}/>
+            <Text style={styles.text}>Detalle</Text>
+            <TextInput style={styles.input} onChangeText={(val) => setDetalle(val)}/>
 
             <TouchableOpacity onPress={()=>pressCrear()} style={[styles.touchable, { backgroundColor: 'green'}]}>
                 <Text style={styles.text}>Crear</Text>

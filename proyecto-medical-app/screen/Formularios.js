@@ -23,7 +23,7 @@ export default function Formularios({navigation, route}) {
         //console.log("Mis formularios");
         //console.log(tratamiento);
         console.log("----------------------");
-        navigation.navigate('Tratamiento', {tratamiento});
+        navigation.navigate('Mis tratamientos');
     }
     //console.log("Get año");
     //console.log(fechaFinal.getDate());
@@ -193,11 +193,12 @@ export default function Formularios({navigation, route}) {
     }
 
     return (
-        <View style={{ flex: 1, alignItems: 'center' }}>
+        <View style={styles.container}>
             <TouchableOpacity onPress={()=>actualizar()} 
                 style={[styles.touchable, {backgroundColor: '#FFF2CC'}]}>
                 <Text style={{fontSize: 17, fontWeight: '400', color: 'black'}}>Guardar cambios</Text>
             </TouchableOpacity>
+             
             {hecho && 
             formulariosMuestra.map(formulario => 
                 <TouchableOpacity key={formulario.fecha.toDate()} onPress={()=>pressGoFormulario(formulario)} 

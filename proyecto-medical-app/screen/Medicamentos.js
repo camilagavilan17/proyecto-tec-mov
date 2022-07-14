@@ -39,27 +39,12 @@ export default function Medicamentos({navigation, route}) {
     }, []);
     
 
-    /*
-    {medicamentos.map(medicamento => 
-                <TouchableOpacity onPress={()=>pressGoMedicamento(medicamento.id)} 
-                    style={[styles.touchable, {backgroundColor: 'green'}]}>
-                    <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>{medicamento.nombre}</Text>
-                </TouchableOpacity>
-            )}
-    */
-
-            /*
-             <TouchableOpacity onPress={pressNuevoMedicamento(idTratamiento)} 
-                style={[styles.touchable, {backgroundColor: 'green'}]}>
-                <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Nuevo medicamento</Text>
-            </TouchableOpacity>
-            */
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <View  style={[styles.container, { justifyContent: 'center' }]}>
            
             {medicamentos.map(medicamento => 
                 <TouchableOpacity onPress={()=>pressGoMedicamento(medicamento)} 
-                    style={[styles.touchable, {backgroundColor: 'green'}]}>
+                    style={[styles.button2, {backgroundColor: 'green'}]}>
                     <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>{medicamento.nombre}</Text>
                 </TouchableOpacity>
             )}

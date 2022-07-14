@@ -41,15 +41,17 @@ export default function CrearNuevoMedicamento({navigation, route}) {
     
     }
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Crear medicamento</Text>
-            <Text>Id tratamiento:</Text>
-            <Text>{idTratamiento}</Text>
+        <View style={[styles.container, { justifyContent: 'center' }]}>
+            <Text style={styles.textTitle}>Crear medicamento</Text>
             
+            <Text style={styles.text}>Nombre del medicamento</Text>
+            <TextInput style={styles.input} onChangeText={(val) => setNombre(val)}/>
             
-            <TextInput style={{borderWidth:1, padding:7, width: 300}} onChangeText={(val) => setNombre(val)} placeholder="Nombre"/>
-            <TextInput style={{borderWidth:1, padding:7, width: 300}} onChangeText={(val) => setHora(val)} placeholder="Hora"/>
-            <TextInput style={{borderWidth:1, padding:7, width: 300}} onChangeText={(val) => setFrecuencia(val)} placeholder="Frecuencia"/>
+            <Text style={styles.text}>Hora inicial del medicamento</Text>
+            <TextInput style={styles.input} onChangeText={(val) => setHora(val)}/>
+
+            <Text style={styles.text}>Frecuencia del medicamento</Text>
+            <TextInput style={styles.input} onChangeText={(val) => setFrecuencia(val)}/>
             
             <TouchableOpacity onPress={() => pressCrear()} style={[styles.touchable, { backgroundColor: 'green'}]}>
                 <Text style={styles.text}>Crear</Text>

@@ -17,10 +17,19 @@ import * as Clipboard from "expo-clipboard";
 import uuid from "uuid";
 import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
+import {styles} from '../estilos/style';
 
 // Firebase establece algunos temporizadores durante un período prolongado, lo que activará algunas advertencias. Apaguemos eso.
 LogBox.ignoreLogs([`Setting a timer for a long period`]);
 export default class NuevaReceta extends React.Component {
+  constructor(props) {
+    super(props);
+     this.datos = {
+      controlId: '',
+    };
+    console.log("Info: "+props.controlId);
+ }
+ 
   state = {
     image: null,
     uploading: false,
@@ -41,7 +50,7 @@ export default class NuevaReceta extends React.Component {
     let { image } = this.state;
 
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={[styles.container, { justifyContent: 'center' }]}>
         {!!image && (
           <Text
             style={{
@@ -55,7 +64,7 @@ export default class NuevaReceta extends React.Component {
           </Text>
         )}
 
-        <Button
+        <Button 
           onPress={this._pickImage}
           title="Agregar una imagen de la galeria"
         />

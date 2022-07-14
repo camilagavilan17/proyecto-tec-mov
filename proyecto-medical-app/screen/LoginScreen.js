@@ -37,7 +37,7 @@ export default function LoginScreen() {
       const user = userCredential.user;
       console.log("AAA");
       console.log(user)
-      navigation.navigate('Home');
+      navigation.navigate('Mis tratamientos');
     })
     .catch(error => {
       console.log(error)
