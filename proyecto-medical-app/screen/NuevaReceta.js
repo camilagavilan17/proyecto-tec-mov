@@ -1,5 +1,4 @@
 import * as ImagePicker from "expo-image-picker";
-import { getApps, initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import React, { Component } from 'react';
 import {
@@ -23,11 +22,14 @@ import {styles} from '../estilos/style';
 LogBox.ignoreLogs([`Setting a timer for a long period`]);
 export default class NuevaReceta extends Component {
  
-  state = {
-    refControlMedico: this.props.navigation.state.params.controlId,
-    image: null,
-    uploading: false,
-  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      refControlMedico: this.props.route.params.controlId,
+      image: null,
+      uploading: false,
+    }
+  } 
 
   async componentDidMount() {
     if (Platform.OS !== "web") {
@@ -200,7 +202,7 @@ async function uploadImageAsync(uri) {
   const fileRef = ref(getStorage(), uuid.v4());
   const result = await uploadBytes(fileRef, blob);
   */
-  const storageRef = ref(getStorage(), uuid.v4()); 
+  const storageRef = ref(getStorage(), uuid.v4());
   const result = await uploadBytes(storageRef, blob).then(() => {
     getDownloadURL(storageRef).then(function (url) {
       addDoc(collection(db, 'recetas'), {
