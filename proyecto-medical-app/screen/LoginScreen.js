@@ -47,7 +47,7 @@ export default function LoginScreen() {
   }
   return (
     <View style={styles.container}>
-      <Image source={require("../assets/fondo2.jpg")} style={[styles.Image, StyleSheet.absoluteFill]} />
+      <Image source={require("../assets/fondo2.jpg")} style={[styles.image, StyleSheet.absoluteFill]} />
       <View style={{width: 100, height: 100, backgroundColor: 'purple', position: 'absolute' }}></View>
       <View style={{width: 100, height: 100, backgroundColor: 'blue', top: 120, position: 'absolute', transform: [{rotate: '25deg'}] }}></View>
       <View style={{width: 100, height: 100, backgroundColor: 'red', bottom: 120 ,position: 'absolute', borderRadius: 50, transform: [{rotate: '50deg'}] }}></View>
@@ -89,11 +89,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-
     flex:1,
     resizeMode: 'cover',
     justifyContent:'center',
- 
+    height: '100%',
   },
   login: {
     width: 350,

@@ -1,6 +1,6 @@
 import * as ImagePicker from "expo-image-picker";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {
   ActivityIndicator,
   Button,
@@ -17,7 +17,7 @@ import uuid from "uuid";
 import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import {styles} from '../estilos/style';
-
+var referencia = '';
 // Firebase establece algunos temporizadores durante un período prolongado, lo que activará algunas advertencias. Apaguemos eso.
 LogBox.ignoreLogs([`Setting a timer for a long period`]);
 export default class NuevaReceta extends Component {
@@ -44,7 +44,8 @@ export default class NuevaReceta extends Component {
 
   render() {
     let { image } = this.state;
-
+    referencia = this.state.refControlMedico;
+    //const [referencia, setReferencia] = useState(this.state.refControlMedico);
     return (
       <View style={[styles.container, { justifyContent: 'center' }]}>
         {!!image && (
@@ -206,7 +207,7 @@ async function uploadImageAsync(uri) {
   const result = await uploadBytes(storageRef, blob).then(() => {
     getDownloadURL(storageRef).then(function (url) {
       addDoc(collection(db, 'recetas'), {
-        refControlMedico: '123',
+        refControlMedico: referencia,
         urlImagen: url
       });
     });

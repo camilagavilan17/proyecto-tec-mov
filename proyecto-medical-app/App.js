@@ -25,7 +25,7 @@ import Ubicacion from './screen/Ubicacion';
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Inicio" component={LoginScreen} />
+        <Stack.Screen name="Medical App" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
 
         <Stack.Screen name="Mis tratamientos" component={Tratamientos} />
