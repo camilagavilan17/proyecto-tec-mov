@@ -13,12 +13,13 @@ import { db } from '../firebase';
 export default function Control({navigation, route}) {
 
     const control = route.params.control;
-    console.log("Ubicacion base: "+control.ubicacion.latitude);
-    console.log("Ubicacion base 2: "+control.ubicacion.longitude);
+    //console.log("Ubicacion base: "+control.ubicacion.latitude);
+    //console.log("Ubicacion base 2: "+control.ubicacion.longitude);
     const auth = getAuth();
     const user = auth.currentUser;
     const userid = user.uid;
     const [mode, setMode] = useState('date');
+    const [recetas, setRecetas] = useState([]);
 
     const [show, setShow] = useState(false);
     const [date, setDate] = useState(new Date());
@@ -28,6 +29,23 @@ export default function Control({navigation, route}) {
         setText(fDate);
         setDate(control.fecha.toDate());
     },[]);
+    useEffect(()=>{
+        console.log("33 Id: "+control.id);
+        const datos = collection(db, 'recetas');
+        const q = query(datos,  where('refControlMedico','==',control.id));
+        const unsuscribe = onSnapshot(q, querySnapshot => {
+            setRecetas(querySnapshot.docs.map(doc => ({
+                id: doc.id,
+                refControlMedico: doc.data().refControlMedico,
+                urlImagen: doc.data().urlImagen,
+            })))
+        })
+        return unsuscribe;
+    },[])
+    useEffect(()=>{
+        console.log("Recetas: "+recetas.length);
+        
+    },[recetas])
     const showMode = (currentMode) => {
         console.log("date");
         console.log(currentMode);
@@ -63,6 +81,15 @@ export default function Control({navigation, route}) {
 
         navigation.navigate('Mis controles', {idTratamiento});
     }
+    const renderItem = ({item}) => {
+        console.log("URL: "+item.urlImagen);
+        return (
+            <View style={styles.list}>
+                <Image style={styles.logo} source={{uri: item.urlImagen}} />
+            </View>
+        )
+    }
+    
     return (
         <View style={[styles.container, { justifyContent: 'center' }]}>
             <Text style={styles.textTitle}>Información del control</Text>
@@ -85,6 +112,11 @@ export default function Control({navigation, route}) {
                 style={[styles.touchable, {backgroundColor: '#FFF2CC'}]}>
                 <Text style={{fontSize: 17, fontWeight: '400', color: 'black'}}>Guardar cambios</Text>
             </TouchableOpacity>
+            <FlatList
+                data={recetas}
+                keyExtractor={item => item.id}
+                renderItem={renderItem}
+            />
             {show && (
                 <DateTimePicker
                     testID= 'dateTimePicker'

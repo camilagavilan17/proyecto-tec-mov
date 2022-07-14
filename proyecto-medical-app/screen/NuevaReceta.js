@@ -1,7 +1,7 @@
 import * as ImagePicker from "expo-image-picker";
 import { getApps, initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import React from "react";
+import React, { Component } from 'react';
 import {
   ActivityIndicator,
   Button,
@@ -21,19 +21,13 @@ import {styles} from '../estilos/style';
 
 // Firebase establece algunos temporizadores durante un período prolongado, lo que activará algunas advertencias. Apaguemos eso.
 LogBox.ignoreLogs([`Setting a timer for a long period`]);
-export default class NuevaReceta extends React.Component {
-  constructor(props) {
-    super(props);
-     this.datos = {
-      controlId: '',
-    };
-    console.log("Info: "+props.controlId);
- }
+export default class NuevaReceta extends Component {
  
   state = {
+    refControlMedico: this.props.navigation.state.params.controlId,
     image: null,
     uploading: false,
-  };
+  }
 
   async componentDidMount() {
     if (Platform.OS !== "web") {

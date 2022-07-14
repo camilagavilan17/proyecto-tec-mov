@@ -50,6 +50,21 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: "justify",
     },
+    list:{
+        width: '100%',
+        flexDirection: 'column',
+        paddingHorizontal: 10,
+        marginBottom: 20
+
+    },
+    listImage:{
+        width: '100%',
+        height: 200
+    },
+    logo: {
+        width: 300,
+        height: 300,
+      },
     textTitle: {
         color: "white",
         fontSize: 26,
