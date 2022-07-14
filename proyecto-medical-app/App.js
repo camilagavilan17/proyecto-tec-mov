@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { getAuth } from 'firebase/auth';
 import 'react-native-gesture-handler';
 import LoginScreen  from './screen/LoginScreen';
 import tratamientosStack from './routes/tratamientosStack';
 import medicamentosStack from './routes/medicamentosStack';
 import formulariosStack from './routes/formulariosStack';
 import controlesStack from './routes/controlesStack';
+import CustomDrawer from './shared/CustomDrawer';
 
   const Stack = createNativeStackNavigator();
   const Drawer = createDrawerNavigator();
 
   function Home() {
     return (
-      <Drawer.Navigator>
+      <Drawer.Navigator drawerContent={props => <CustomDrawer {...props} />}>
         <Drawer.Screen name="Tratamientos" component={tratamientosStack}/>
         <Drawer.Screen name="Medicamentos" component={medicamentosStack}/>
         <Drawer.Screen name="Formularios" component={formulariosStack}/>

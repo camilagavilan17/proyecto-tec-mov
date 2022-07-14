@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 
 export default function tratamientosStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Group /*screenOptions={{ header: () => <Header /> }}*/>
         <Stack.Screen name="Mis tratamientos" component={ Tratamientos }/>
         <Stack.Screen name="Tratamiento" component={ Tratamiento }/>

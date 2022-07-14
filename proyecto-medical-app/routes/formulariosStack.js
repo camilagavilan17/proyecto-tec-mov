@@ -5,7 +5,7 @@ const Stack = createStackNavigator();
 
 export default function formulariosStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Group /*screenOptions={{ header: () => <Header /> }}*/>
         <Stack.Screen name="Mis formularios" component={ Formularios }/>
       </Stack.Group>

@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 
 export default function controlesStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Group /*screenOptions={{ header: () => <Header /> }}*/>
         <Stack.Screen name="Mis controles" component={Controles} />
         <Stack.Screen name="Control" component={Control} />
